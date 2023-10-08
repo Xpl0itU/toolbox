@@ -18,12 +18,16 @@ jobs:
         with:
           python-version: '3.11'
           architecture: 'x64'
+      - name: Install X11 deps
+        run: |
+            apt install libxcb-xinerama0
       - name: Install requirements
         run: |
           pip install -U -r requirements.txt
       - name: Run PyInstaller
         run: |
           python -m PyInstaller toolbox.spec
+          tar cfv toolbox-linux.tar.gz dist/toolbox
       - name: Upload Linux Artifact
         uses: ncipollo/release-action@v1
         with:
@@ -32,5 +36,5 @@ jobs:
             omitBody: True
             omitBodyDuringUpdate: True
             omitNameDuringUpdate: True
-            artifacts: "dist/toolbox"
+            artifacts: "toolbox-linux.tar.gz"
             token: ${{ secrets.GITHUB_TOKEN }}
