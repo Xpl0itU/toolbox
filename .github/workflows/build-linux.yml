@@ -20,7 +20,7 @@ jobs:
           architecture: 'x64'
       - name: Install X11 deps
         run: |
-            apt install libxcb-xinerama0
+            sudo apt install libxcb-xinerama0
       - name: Install requirements
         run: |
           pip install -U -r requirements.txt
